@@ -11,6 +11,10 @@
 (setq use-dialog-box nil)
 (setq ring-bell-function 'ignore)
 
+;; Line number
+;; (setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode t)
+
 ;; Font
 (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-17"))
 

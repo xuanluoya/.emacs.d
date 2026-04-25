@@ -5,26 +5,21 @@
 ;; Terminal
 (sup 'vterm)
 
-(add-hook 'vterm-mode-hook
-          (lambda ()
-            (setq-local global-hl-line-mode (null global-hl-line-mode))))
-
 (setq vterm-kill-buffer-on-exit t)
-
 (setq vterm-buffer-name-string "vt")
 
 (sup 'vterm-toggle)
+
 (setq vterm-toggle-hide-method 'delete-window)
 (setq vterm-toggle-fullscreen-p nil)
 
-(add-to-list 'display-buffer-alist
-             '((lambda (buffer-or-name _)
-                 (let ((buffer (get-buffer buffer-or-name)))
-                   (equal major-mode 'vterm-mode)))
-               (display-buffer-reuse-window display-buffer-at-bottom)
-               (dedicated . t)
-               (reusable-frames . visible)
-               (window-height . 0.3)))
+(setq display-buffer-alist
+      (cons '("\\*vterm\\*"
+              (display-buffer-reuse-window display-buffer-at-bottom)
+              (window-height . 0.3)
+              (reusable-frames . visible)
+              (side . bottom))
+            display-buffer-alist))
 
 (defun vterm--kill-vterm-buffer-and-window (process event)
   "Kill buffer and window on vterm process termination."
@@ -38,9 +33,9 @@
 
 (add-hook 'vterm-mode-hook
           (lambda ()
-            (set-process-sentinel (get-buffer-process (buffer-name))
-                                  #'vterm--kill-vterm-buffer-and-window)))
-
+            (setq-local global-hl-line-mode nil)
+            (set-process-sentinel (get-buffer-process (current-buffer))
+                                 #'vterm--kill-vterm-buffer-and-window)))
 
 ;; Git GUI
 (sup 'magit)

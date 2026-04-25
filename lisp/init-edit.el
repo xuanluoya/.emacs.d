@@ -35,6 +35,9 @@
 (setq corfu-auto t)
 (add-hook 'after-init-hook #'global-corfu-mode)
 
+;; Avy
+(sup 'avy)
+
 ;; projectile
 (sup 'projectile)
 (require 'projectile)

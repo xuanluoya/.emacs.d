@@ -30,5 +30,11 @@
 (global-set-key (kbd "C-x h x") #'helpful-command)   ;; View command interaction definitions
 (global-set-key (kbd "C-x h d") #'helpful-at-point)  ;; View the definition of the symbol under the cursor
 
+;; Avy
+(global-set-key (kbd "C-:")   #'avy-goto-char)
+(global-set-key (kbd "C-'")   #'avy-goto-char-2)
+(global-set-key (kbd "M-g l") #'avy-goto-line)
+(global-set-key (kbd "M-g w") #'avy-goto-word-1)
+
 (provide 'init-mapping)
 ;;; init-mapping.el ends here
