@@ -33,35 +33,6 @@
 ;; Windows titles
 (setq-default frame-title-format '("emacs: %b"))
 
-;; telephone-line
-(sup 'telephone-line)
-(require 'telephone-line)
-(setq telephone-line-primary-left-separator 'telephone-line-cubed-left
-      telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
-      telephone-line-primary-right-separator 'telephone-line-cubed-right
-      telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-(setq telephone-line-height 24)
-
-(telephone-line-defsegment* telephone-line-simpler-major-mode-segment ()
-  (concat "["
-          (if (listp mode-name)
-              (car mode-name)
-            mode-name)
-          "]"))
-
-(telephone-line-defsegment* telephone-line-simple-pos-segment ()
-  (concat "%c : " "%l/" (number-to-string (count-lines (point-min) (point-max)))))
-
-(setq telephone-line-lhs
-      '((nil . (telephone-line-projectile-buffer-segment))
-        (accent . (telephone-line-simpler-major-mode-segment))
-        (nil . (telephone-line-misc-info-segment)))
-      telephone-line-rhs
-      '((nil . (telephone-line-simple-pos-segment))
-        (accent . (telephone-line-buffer-modified-segment))))
-
-(telephone-line-mode 1)
-
 ;; Smooth scrolling
 (defun pixel-scroll-setup ()
   (interactive)
@@ -94,8 +65,8 @@
 (setq dashboard-item-names '(("Recent Files:" . "recent:")
                              ("Projects:" . "projects:")))
 (setq dashboard-banner-logo-title "GNU emacsへようこそ。")
-(setq dashboard-image-banner-max-height 300)
-(setq dashboard-image-banner-max-width 300)
+(setq dashboard-image-banner-max-height 320)
+(setq dashboard-image-banner-max-width 320)
 (defmacro set-dashboard-banner (name)
   `(setq dashboard-startup-banner
          (expand-file-name ,name user-emacs-directory)))

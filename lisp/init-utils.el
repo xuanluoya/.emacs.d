@@ -42,6 +42,9 @@
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history nil)
 
+;; Full
+(toggle-frame-fullscreen)
+
 
 (provide 'init-utils)
 ;;; init-utils.el ends here
