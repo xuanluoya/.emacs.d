@@ -36,5 +36,31 @@
 (global-set-key (kbd "M-g l") #'avy-goto-line)
 (global-set-key (kbd "M-g w") #'avy-goto-word-1)
 
+;; Evil keybindings (SPC leader)
+(sup 'general)
+(require 'general)
+
+;; Enable evil integration and auto-unbind for SPC prefix
+(general-evil-setup)
+(general-auto-unbind-keys)
+
+;; SPC as leader key (only in evil normal/motion/visual states)
+(general-create-definer my-leader
+  :prefix "SPC"
+  :states '(normal motion visual))
+
+(my-leader
+  "f" 'find-file
+  "b" 'switch-to-buffer
+  "d" 'dired
+  "w" 'delete-window
+  "W" 'other-window
+  "s" 'save-buffer
+  "g" 'magit-status
+  "v" 'vterm-toggle
+  "x" 'execute-extended-command
+  "?" 'helpful-at-point
+  "q" 'save-buffers-kill-terminal)
+
 (provide 'init-mapping)
 ;;; init-mapping.el ends here

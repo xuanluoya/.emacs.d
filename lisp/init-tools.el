@@ -34,7 +34,7 @@
 (add-hook 'vterm-mode-hook
           (lambda ()
             (setq-local global-hl-line-mode nil)
-            (set-process-sentinel (get-buffer-process (current-buffer))
+ (set-process-sentinel (get-buffer-process (current-buffer))
                                  #'vterm--kill-vterm-buffer-and-window)))
 
 ;; Git GUI
@@ -45,7 +45,6 @@
 (setq ediff-custom-diff-options "-u")
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-vertically)
-
 
 (provide 'init-tools)
 ;;; init.el ends here

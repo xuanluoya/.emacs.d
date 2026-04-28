@@ -7,7 +7,7 @@
 (require 'vertico)
 (vertico-mode)
 
-;; DEL?
+;; DEL
 (define-key vertico-map (kbd "DEL") #'vertico-directory-delete-char)
 
 ;; vertico-posframe
@@ -63,6 +63,11 @@
 ;; Markdown
 (sup 'markdown-mode)
 
+
+;; Evil - Vim emulation
+(sup 'evil)
+(require 'evil)
+(evil-mode 1)
 
 (provide 'init-edit)
 ;;; init-edit ends here

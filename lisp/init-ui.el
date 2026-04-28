@@ -12,8 +12,8 @@
 (setq ring-bell-function 'ignore)
 
 ;; Line number
-;; (setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode t)
+; (setq display-line-numbers-type 'relative)
+; (global-display-line-numbers-mode t)
 
 ;; Font
 (add-to-list 'default-frame-alist '(font . "Maple Mono NF CN-17"))
@@ -36,6 +36,34 @@
 
 ;; Windows titles
 (setq-default frame-title-format '("emacs: %b"))
+
+;; Line mode
+(setq-default mode-line-format
+      '("%e"
+        " "
+        (:eval (propertize "%b " 'face 'bold))
+        ;; 百分比
+        " %p "
+        ;; 行号
+        "L%l "
+        
+        (:eval (propertize " " 'display `((space :align-to (- right ,(length (my-mode-line-lsp-info)))))))
+
+        (:eval (my-mode-line-lsp-info))
+        " "))
+
+;; Get LSP
+(defun my-mode-line-lsp-info ()
+  (let ((lsp-status ""))
+    (cond
+     ((and (featurep 'eglot) (eglot-current-server))
+      (setq lsp-status (concat " " (eglot-project-nickname (eglot-current-server)))))
+     ((and (featurep 'lsp-mode) (bound-and-true-p lsp-mode))
+      (setq lsp-status (concat " " (apply #'concat (mapcar #'lsp--workspace-print (lsp-workspaces)))))))
+    
+    (if (string-empty-p lsp-status)
+        ""
+      (propertize lsp-status 'face 'shadow))))
 
 ;; Smooth scrolling
 (defun pixel-scroll-setup ()
